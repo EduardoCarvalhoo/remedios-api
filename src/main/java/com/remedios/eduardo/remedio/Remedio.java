@@ -17,10 +17,10 @@ import lombok.Setter;
 
 @Table(name = "Remedio")
 @Entity(name = "remedios")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @EqualsAndHashCode(of = "id")
 public class Remedio {
 
