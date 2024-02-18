@@ -3,7 +3,7 @@ package com.remedios.eduardo.remedio;
 import java.time.LocalDate;
 
 public record DadosListagemRemedioDTO(
-		
+		Long id,
 		String nome, 
 		Via via, 
 		String lote, 
@@ -11,6 +11,6 @@ public record DadosListagemRemedioDTO(
 		LocalDate validade) {
 
 	public DadosListagemRemedioDTO(Remedio remedio) {
-		this(remedio.getNome(), remedio.getVia(), remedio.getLote(), remedio.getLaboratorio(), remedio.getValidade());
+		this(remedio.getId(), remedio.getNome(), remedio.getVia(), remedio.getLote(), remedio.getLaboratorio(), remedio.getValidade());
 	}
 }
