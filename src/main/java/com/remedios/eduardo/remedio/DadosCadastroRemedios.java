@@ -1,11 +1,23 @@
 package com.remedios.eduardo.remedio;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+
 public record DadosCadastroRemedios(
-		String nome,
-		Via via,
-		String lote,
-		String quantidade,
-		String validade,
+
+		@NotBlank 
+		String nome, 
+		@Enumerated 
+		Via via, 
+		@NotBlank 
+		String lote, 
+		int quantidade,
+		@Future 
+		LocalDate validade, 
+		@Enumerated 
 		Laboratorio laboratorio) {
 
 }

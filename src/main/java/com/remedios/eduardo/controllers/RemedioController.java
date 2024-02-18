@@ -10,15 +10,17 @@ import com.remedios.eduardo.remedio.DadosCadastroRemedios;
 import com.remedios.eduardo.remedio.Remedio;
 import com.remedios.eduardo.remedio.RemedioRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/remedios")
 public class RemedioController {
-	
+
 	@Autowired
 	private RemedioRepository repository;
 
 	@PostMapping
-	public void cadastrar(@RequestBody DadosCadastroRemedios dados) {
+	public void cadastrar(@RequestBody @Valid DadosCadastroRemedios dados) {
 		repository.save(new Remedio(dados));
 	}
 }
