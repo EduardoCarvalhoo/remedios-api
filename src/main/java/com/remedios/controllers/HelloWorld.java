@@ -1,4 +1,4 @@
-package com.remedios.eduardo.controllers;
+package com.remedios.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.remedios.eduardo.remedio;
+package com.remedios.remedio;
 
 public enum Laboratorio {
 

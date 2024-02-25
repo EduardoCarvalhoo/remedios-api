@@ -1,4 +1,4 @@
-package com.remedios.eduardo.controllers;
+package com.remedios.controllers;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.remedios.eduardo.remedio.DadosAtualizarRemedio;
-import com.remedios.eduardo.remedio.DadosCadastroRemedios;
-import com.remedios.eduardo.remedio.DadosDetalhamentoRemedio;
-import com.remedios.eduardo.remedio.DadosListagemRemedioDTO;
-import com.remedios.eduardo.remedio.Remedio;
-import com.remedios.eduardo.remedio.RemedioRepository;
+import com.remedios.remedio.DadosAtualizarRemedio;
+import com.remedios.remedio.DadosCadastroRemedios;
+import com.remedios.remedio.DadosDetalhamentoRemedio;
+import com.remedios.remedio.DadosListagemRemedioDTO;
+import com.remedios.remedio.Remedio;
+import com.remedios.remedio.RemedioRepository;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.remedios.eduardo.remedio;
+package com.remedios.remedio;
 
 import java.util.List;
 

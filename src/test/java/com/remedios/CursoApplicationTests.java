@@ -1,4 +1,4 @@
-package com.remedios.eduardo;
+package com.remedios;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
