@@ -2,6 +2,8 @@ package com.remedios.controllers;
 
 import java.util.List;
 
+import com.remedios.constantes.RabbitmqConstantes;
+import com.remedios.service.RabbitmqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.remedios.remedio.DadosAtualizarRemedio;
-import com.remedios.remedio.DadosCadastroRemedios;
-import com.remedios.remedio.DadosDetalhamentoRemedio;
-import com.remedios.remedio.DadosListagemRemedioDTO;
-import com.remedios.remedio.Remedio;
-import com.remedios.remedio.RemedioRepository;
+import com.remedios.dtos.DadosAtualizarRemedioDTO;
+import com.remedios.dtos.DadosCadastroRemediosDTO;
+import com.remedios.dtos.DadosDetalhamentoRemedioDTO;
+import com.remedios.dtos.DadosListagemRemedioDTO;
+import com.remedios.domain.remedio.Remedio;
+import com.remedios.repository.RemedioRepository;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -30,16 +32,21 @@ public class RemedioController {
 
 	@Autowired
 	private RemedioRepository repository;
+	@Autowired
+	private RabbitmqService rabbitmqService;
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<DadosDetalhamentoRemedio> cadastrar(@RequestBody @Valid DadosCadastroRemedios dados, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<DadosDetalhamentoRemedioDTO> cadastrar(@RequestBody @Valid DadosCadastroRemediosDTO dados, UriComponentsBuilder uriBuilder) {
 		var remedio = new Remedio(dados);
 		repository.save(remedio);
+
+		System.out.println(dados.quantidade());
+		this.rabbitmqService.enviaMensagem(RabbitmqConstantes.FILA_REMEDIO, dados);
 		
 		var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.getId()).toUri();
 		
-		return ResponseEntity.created(uri).body(new DadosDetalhamentoRemedio(remedio));
+		return ResponseEntity.created(uri).body(new DadosDetalhamentoRemedioDTO(remedio));
 	}
 
 	@GetMapping
@@ -51,11 +58,11 @@ public class RemedioController {
 
 	@PutMapping
 	@Transactional
-	public ResponseEntity<DadosDetalhamentoRemedio> atualizar(@RequestBody @Valid DadosAtualizarRemedio dados) {
+	public ResponseEntity<DadosDetalhamentoRemedioDTO> atualizar(@RequestBody @Valid DadosAtualizarRemedioDTO dados) {
 		var remedio = repository.getReferenceById(dados.id());
 		remedio.atualizarInformacoes(dados);
 		
-		return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
+		return ResponseEntity.ok(new DadosDetalhamentoRemedioDTO(remedio));
 	}
 
 	@DeleteMapping("/{id}")

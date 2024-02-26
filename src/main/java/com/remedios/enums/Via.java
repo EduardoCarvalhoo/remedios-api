@@ -1,4 +1,4 @@
-package com.remedios.remedio;
+package com.remedios.enums;
 
 public enum Via {
 

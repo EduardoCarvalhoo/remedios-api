@@ -1,7 +1,11 @@
-package com.remedios.remedio;
+package com.remedios.domain.remedio;
 
 import java.time.LocalDate;
 
+import com.remedios.dtos.DadosAtualizarRemedioDTO;
+import com.remedios.dtos.DadosCadastroRemediosDTO;
+import com.remedios.enums.Laboratorio;
+import com.remedios.enums.Via;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,7 +29,7 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "id")
 public class Remedio {
 
-	public Remedio(DadosCadastroRemedios dados) {
+	public Remedio(DadosCadastroRemediosDTO dados) {
 		this.ativo = true;
 		this.nome = dados.nome();
 		this.via = dados.via();
@@ -51,7 +55,7 @@ public class Remedio {
 	
 	private Boolean ativo;
 
-	public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
+	public void atualizarInformacoes(@Valid DadosAtualizarRemedioDTO dados) {
 		if(dados.nome() != null) {
 			this.nome = dados.nome();
 		}
